@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ipynb_checkpoints/
+.DS_Store
+__MACOSX/
+data/
+artifacts/
+*.part
+cats_and_dogs/
+cats_and_dogs.zip
