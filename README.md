@@ -4,6 +4,12 @@
 
 A computer-vision project that distinguishes cats from dogs using a convolutional neural network trained from scratch. It demonstrates image ingestion, training-only augmentation, binary classification, validation-based checkpoint selection, and filename-aligned test evaluation.
 
+## Original work
+
+The original saved CNN run records **79.58% validation accuracy after 35 epochs**. This historical result is preserved with the notebook; it is not a newly reproduced test-set score.
+
+[Original notebook and evidence](docs/original-work.md). The runnable edition below includes maintenance fixes; new validation numbers are kept separate from historical achievements.
+
 ## Run locally
 
 ```bash
@@ -46,7 +52,7 @@ Class mapping: **0 = cat, 1 = dog**. Input to the saved model is RGB pixels in t
 
 `artifacts/` contains `model.keras`, `metrics.json`, `history.json`, and `predictions.csv`. Generated artifacts and downloaded data are ignored by Git. The run also saves `training.png`. The dataset is downloaded automatically when missing and cached locally. Redundant dataset copies and macOS archive metadata are removed from the current Git tree; they remain recoverable in project history.
 
-## Verified results
+## Runnable-code checks
 
 See [the reproducibility report](docs/validation.md) for measured results, commands, environment, and the limits of validation.
 
@@ -57,7 +63,7 @@ import numpy as np
 import tensorflow as tf
 
 model = tf.keras.models.load_model("artifacts/model.keras", compile=False)
-image = tf.keras.utils.load_img("example.jpg", target_size=(150, 150))
+image = tf.keras.utils.load_img("example.jpg", target_size=(150, 150), interpolation="bilinear")
 pixels = tf.keras.utils.img_to_array(image)
 score = float(model(np.expand_dims(pixels, 0), training=False).numpy()[0, 0])
 print({"label": "dog" if score >= 0.5 else "cat", "dog_score": score})

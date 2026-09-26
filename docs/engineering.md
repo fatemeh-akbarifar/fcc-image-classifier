@@ -31,3 +31,7 @@ The validation report describes newly executed runs. It does not retroactively c
 [Dataset checksums](data-manifest.json) identify the exact downloaded inputs used for validation. These are hashes of public dataset files, not private Drive content.
 
 The current Git tree excludes the original duplicate dataset ZIP, extracted images, and `__MACOSX` files. Download caching replaces those tracked copies; prior Git history is preserved.
+
+## Original work is preserved
+
+See [the original project record](original-work.md) for archived code and saved outputs. These are separate from maintenance changes and their validation results.

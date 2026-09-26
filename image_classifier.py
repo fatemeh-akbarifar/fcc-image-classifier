@@ -71,7 +71,7 @@ def main():
     model = build_model()
     history = model.fit(train, validation_data=validation, epochs=args.epochs, verbose=2,
                         callbacks=[tf.keras.callbacks.EarlyStopping(monitor="val_loss", patience=5, restore_best_weights=True)])
-    test_images = np.stack([tf.keras.utils.img_to_array(tf.keras.utils.load_img(p, target_size=SIZE)) for p in files])
+    test_images = np.stack([tf.keras.utils.img_to_array(tf.keras.utils.load_img(p, target_size=SIZE, interpolation="bilinear")) for p in files])
     probabilities = model.predict(test_images, batch_size=args.batch_size, verbose=0).ravel()
     accuracy = float(np.mean((probabilities >= .5) == np.array(ANSWERS)))
     val_metrics = model.evaluate(validation, verbose=0, return_dict=True)
